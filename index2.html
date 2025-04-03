@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lima Motos - Peças e Acessórios para Motocicletas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Cores personalizadas */
+        :root {
+            --verde-lima: #8bc34a;
+            --laranja-lima: #ff9800;
+            --preto: #212121;
+            --branco: #ffffff;
+            --cinza-claro: #f5f5f5;
+            --cinza-escuro: #757575;
+        }
+
+        /* Reset e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--cinza-claro);
+            color: var(--preto);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Cabeçalho */
+        header {
+            background-color: var(--branco);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            background-color: var(--verde-lima);
+            color: var(--branco);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .top-bar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .top-bar-offer {
+            font-weight: bold;
+        }
+        
+        .top-bar-links a {
+            color: var(--branco);
+            margin-left: 15px;
+            font-size: 13px;
+        }
+        
+        .main-header {
+            padding: 15px 0;
+            background-color: var(--branco);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+        }
+        
+        .logo span:first-child {
+            color: var(--verde-lima);
+        }
+        
+        .logo span:last-child {
+            color: var(--laranja-lima);
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 30px;
+        }
+        
+        .search-bar input {
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: var(--laranja-lima);
+            color: var(--branco);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            margin-left: -5px;
+        }
+        
+        .user-actions a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: var(--preto);
+            transition: color 0.3s;
+        }
+        
+        .user-actions a:hover {
+            color: var(--laranja-lima);
+        }
+        
+        .user-actions i {
+            margin-right: 5px;
+        }
+        
+        /* Menu Horizontal */
+        .main-menu {
+            background-color: var(--preto);
+        }
+        
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .menu-list {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu-list li {
+            position: relative;
+        }
+        
+        .menu-list li a {
+            display: block;
+            color: var(--branco);
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .menu-list li a:hover {
+            background-color: var(--laranja-lima);
+        }
+        
+        /* Conteúdo Principal */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Banner de Desconto */
+        .discount-banner {
+            background: linear-gradient(90deg, var(--verde-lima), var(--laranja-lima));
+            color: var(--branco);
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Seção de Produtos - Grid */
+        .featured-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--preto);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--laranja-lima);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background-color: var(--branco);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 180px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--cinza-claro);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--laranja-lima);
+            color: var(--branco);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            flex: 1;
+        }
+        
+        .product-brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--verde-lima);
+            margin-bottom: 5px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--preto);
+            margin-bottom: 8px;
+        }
+        
+        .product-specs {
+            font-size: 14px;
+            color: var(--cinza-escuro);
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        
+        .product-pricing {
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .cash-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--laranja-lima);
+        }
+        
+        .installment-price {
+            font-size: 14px;
+            color: var(--cinza-escuro);
+            margin: 5px 0 10px;
+        }
+        
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--verde-lima);
+            color: var(--branco);
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        
+        .buy-button:hover {
+            background-color: var(--laranja-lima);
+        }
+        
+        /* Paginação */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--branco);
+            color: var(--preto);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover,
+        .pagination a.active {
+            background-color: var(--verde-lima);
+            color: var(--branco);
+            border-color: var(--verde-lima);
+        }
+        
+        .pagination a.disabled {
+            color: #ccc;
+            pointer-events: none;
+            background-color: #f5f5f5;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: var(--preto);
+            color: var(--branco);
+            padding: 40px 20px;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            margin-bottom: 20px;
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--branco);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--laranja-lima);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--verde-lima);
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .contact-info i {
+            margin-right: 8px;
+            color: var(--laranja-lima);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            color: var(--branco);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--verde-lima);
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .payment-method {
+            background-color: #444;
+            color: var(--branco);
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .security-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .security-badge {
+            background-color: #444;
+            color: var(--branco);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* Cookie Consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+        
+        .cookie-text {
+            flex: 1;
+            font-size: 14px;
+            margin-right: 20px;
+        }
+        
+        .cookie-text a {
+            color: var(--laranja-lima);
+            text-decoration: underline;
+        }
+        
+        .cookie-btn {
+            background-color: var(--verde-lima);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: background-color 0.3s;
+        }
+        
+        .cookie-btn:hover {
+            background-color: var(--laranja-lima);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .menu-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .menu-list li a {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar-container {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .top-bar-links a {
+                margin: 0 8px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cookie-consent {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cookie-text {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .discount-banner {
+                font-size: 14px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .menu-list li a {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            
+            .pagination a {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-container">
+                <div class="top-bar-offer">
+                    <i class="fas fa-bolt"></i> OFERTAS ESPECIAIS PARA SUA MOTO - FRETE GRÁTIS ACIMA DE R$ 200
+                </div>
+                <div class="top-bar-links">
+                    <a href="#"><i class="fas fa-credit-card"></i> ATÉ 10X SEM JUROS</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> NOSSA LOJA FÍSICA</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="header-container">
+                <div class="logo">
+                    <span>LIMA</span><span>MOTOS</span>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Buscar peças e acessórios...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="user-actions">
+                    <a href="#"><i class="fas fa-user"></i> Minha Conta</a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-menu">
+            <div class="menu-container">
+                <ul class="menu-list">
+                    <li><a href="#">PROMOÇÕES</a></li>
+                    <li><a href="#">PEÇAS</a></li>
+                    <li><a href="#">ACESSÓRIOS</a></li>
+                    <li><a href="#">PNEUS</a></li>
+                    <li><a href="#">ÓLEOS</a></li>
+                    <li><a href="#">FERRAMENTAS</a></li>
+                    <li><a href="#">VESTUÁRIO</a></li>
+                    <li><a href="#">CONTATO</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <div class="discount-banner">
+            <i class="fas fa-tags"></i> CUPOM: LIMA10 - 10% DE DESCONTO NA PRIMEIRA COMPRA!
+        </div>
+        
+        <section class="featured-section">
+            <h2 class="section-title">DESTAQUES DA LOJA</h2>
+            <div class="products-grid" id="featured-offers">
+                <!-- Os produtos serão inseridos via JavaScript -->
+            </div>
+            <div class="pagination" id="featured-pagination"></div>
+        </section>
+        
+        <section class="featured-section">
+            <h2 class="section-title">ACESSÓRIOS MAIS VENDIDOS</h2>
+            <div class="products-grid" id="top-sellers">
+                <!-- Os produtos serão inseridos via JavaScript -->
+            </div>
+            <div class="pagination" id="sellers-pagination"></div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 class="footer-title">SOBRE A LIMA MOTOS</h3>
+                <p style="margin-bottom: 15px;">Especializada em peças e acessórios para motocicletas, a Lima Motos traz qualidade e preço justo para você manter sua moto em perfeito estado.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">ATENDIMENTO</h3>
+                <ul class="footer-links">
+                    <li class="contact-info">
+                        <i class="fas fa-phone"></i> (99) 99220-0629
+                    </li>
+                    <li class="contact-info">
+                        <i class="fas fa-envelope"></i> casa.l@hotmail.com
+                    </li>
+                    <li class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i> End. MA 270 Saida Para Mirador
+                    </li>
+                    <li class="contact-info">
+                        <i class="fas fa-clock"></i> Seg-Sex: 7h-18h | Sáb: 7h-12h
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">LINKS ÚTEIS</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Trocas e Devoluções</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">Trabalhe Conosco</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">FORMAS DE PAGAMENTO</h3>
+                <div class="payment-methods">
+                    <span class="payment-method">VISA</span>
+                    <span class="payment-method">MASTERCARD</span>
+                    <span class="payment-method">ELO</span>
+                    <span class="payment-method">PIX</span>
+                    <span class="payment-method">BOLETO</span>
+                    <span class="payment-method">TRANSFERÊNCIA</span>
+                </div>
+                
+                <h3 class="footer-title" style="margin-top: 20px;">COMPRE COM SEGURANÇA</h3>
+                <div class="security-badges">
+                    <span class="security-badge">SSL</span>
+                    <span class="security-badge">SITE SEGURO</span>
+                    <span class="security-badge">DADOS PROTEGIDOS</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #444;">
+            <p style="font-size: 12px; color: #bbb;">&copy; 2025 Lima Motos - CNPJ: XX.XXX.XXX/0001-XX - Todos os direitos reservados</p>
+            <p style="font-size: 12px; color: #bbb; margin-top: 5px;">Desenvolvido por JOÃO SOARES</p>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent">
+        <div class="cookie-text">
+            Nós utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com nossa <a href="#">Política de Privacidade</a> e <a href="#">Política de Cookies</a>.
+        </div>
+        <button class="cookie-btn">ACEITAR COOKIES</button>
+    </div>
+
+    <script>
+        // Dados dos produtos (aumentei para testar a paginação)
+        const products = [
+            {
+                id: 1,
+                brand: "Honda",
+                name: "Kit Corrente 428 - CG 150/160",
+                specs: "Compatível com CG 150/160 Titan | 118 elos",
+                cashPrice: "R$ 129,90 à vista",
+                installmentPrice: "ou 3x de R$ 43,30",
+                image: "https://via.placeholder.com/300x300?text=Kit+Corrente+CG",
+                category: "destaques",
+                badge: "LANÇAMENTO"
+            },
+            {
+                id: 2,
+                brand: "Yamaha",
+                name: "Pneu Dianteiro 90/90-18",
+                specs: "Pneu dianteiro para Factor 150 | Medida 90/90-18",
+                cashPrice: "R$ 219,90 à vista",
+                installmentPrice: "ou 6x de R$ 36,65",
+                image: "https://via.placeholder.com/300x300?text=Pneu+Yamaha",
+                category: "destaques",
+                badge: "OFERTA"
+            },
+            {
+                id: 3,
+                brand: "Metzeler",
+                name: "Pneu Traseiro 110/90-18",
+                specs: "Pneu traseiro esportivo | Medida 110/90-18",
+                cashPrice: "R$ 349,90 à vista",
+                installmentPrice: "ou 10x de R$ 34,99",
+                image: "https://via.placeholder.com/300x300?text=Pneu+Metzeler",
+                category: "destaques",
+                badge: "MAIS VENDIDO"
+            },
+            {
+                id: 4,
+                brand: "Fox",
+                name: "Capacete Jet Preto",
+                specs: "Capacete estilo jet | Tamanhos P-M-G | Certificado INMETRO",
+                cashPrice: "R$ 189,90 à vista",
+                installmentPrice: "ou 5x de R$ 37,98",
+                image: "https://via.placeholder.com/300x300?text=Capacete+Fox",
+                category: "top-sellers",
+                badge: "PROMOÇÃO"
+            },
+            {
+                id: 5,
+                brand: "Alpinestars",
+                name: "Luvas Motoqueiro",
+                specs: "Luvas para motociclista | Tamanhos P-M-G-GG | Proteção em carbono",
+                cashPrice: "R$ 159,90 à vista",
+                installmentPrice: "ou 4x de R$ 39,98",
+                image: "https://via.placeholder.com/300x300?text=Luvas+Alpinestars",
+                category: "top-sellers",
+                badge: "ESGOTANDO"
+            },
+            {
+                id: 6,
+                brand: "Motul",
+                name: "Óleo 20W50 Semi-Sintético",
+                specs: "Óleo para motor 20W50 | 1 litro | Semi-sintético",
+                cashPrice: "R$ 39,90 à vista",
+                installmentPrice: "ou 2x de R$ 19,95",
+                image: "https://via.placeholder.com/300x300?text=Oleo+Motul",
+                category: "top-sellers",
+                badge: "OFERTA"
+            },
+            {
+                id: 7,
+                brand: "Shimano",
+                name: "Kit Embreagem CG 150",
+                specs: "Kit completo de embreagem para CG 150 | Original",
+                cashPrice: "R$ 89,90 à vista",
+                installmentPrice: "ou 3x de R$ 29,97",
+                image: "https://via.placeholder.com/300x300?text=Embreagem+CG",
+                category: "destaques",
+                badge: "LANÇAMENTO"
+            },
+            {
+                id: 8,
+                brand: "Dafra",
+                name: "Farol Dianteiro NH190",
+                specs: "Farol dianteiro original NH190 | Compatível com várias modelos",
+                cashPrice: "R$ 129,90 à vista",
+                installmentPrice: "ou 4x de R$ 32,48",
+                image: "https://via.placeholder.com/300x300?text=Farol+Dafra",
+                category: "destaques",
+                badge: "NOVO"
+            },
+            {
+                id: 9,
+                brand: "Triumph",
+                name: "Retrovisor Esquerdo",
+                specs: "Retrovisor esquerdo universal | Ajustável",
+                cashPrice: "R$ 79,90 à vista",
+                installmentPrice: "ou 2x de R$ 39,95",
+                image: "https://via.placeholder.com/300x300?text=Retrovisor+Triumph",
+                category: "destaques",
+                badge: "OFERTA"
+            },
+            {
+                id: 10,
+                brand: "Kawasaki",
+                name: "Pastilha de Freio Dianteira",
+                specs: "Pastilha de freio dianteira | Compatível com várias modelos",
+                cashPrice: "R$ 119,90 à vista",
+                installmentPrice: "ou 3x de R$ 39,97",
+                image: "https://via.placeholder.com/300x300?text=Pastilha+Kawasaki",
+                category: "destaques",
+                badge: "MAIS VENDIDO"
+            },
+            {
+                id: 11,
+                brand: "Harley Davidson",
+                name: "Banco Couro Premium",
+                specs: "Banco em couro premium | Conforto superior",
+                cashPrice: "R$ 599,90 à vista",
+                installmentPrice: "ou 10x de R$ 59,99",
+                image: "https://via.placeholder.com/300x300?text=Banco+Harley",
+                category: "destaques",
+                badge: "PREMIUM"
+            },
+            {
+                id: 12,
+                brand: "BMW",
+                name: "Farol Auxiliar LED",
+                specs: "Farol auxiliar LED | 6000K | Alta luminosidade",
+                cashPrice: "R$ 289,90 à vista",
+                installmentPrice: "ou 6x de R$ 48,32",
+                image: "https://via.placeholder.com/300x300?text=Farol+BMW",
+                category: "destaques",
+                badge: "TECNOLOGIA"
+            },
+            {
+                id: 13,
+                brand: "Ducati",
+                name: "Manopla Esportiva",
+                specs: "Manopla esportiva | Antivibração | Conforto",
+                cashPrice: "R$ 149,90 à vista",
+                installmentPrice: "ou 4x de R$ 37,48",
+                image: "https://via.placeholder.com/300x300?text=Manopla+Ducati",
+                category: "destaques",
+                badge: "ESPORTIVO"
+            },
+            {
+                id: 14,
+                brand: "Suzuki",
+                name: "Filtro de Ar Esportivo",
+                specs: "Filtro de ar esportivo | Maior fluxo de ar",
+                cashPrice: "R$ 89,90 à vista",
+                installmentPrice: "ou 3x de R$ 29,97",
+                image: "https://via.placeholder.com/300x300?text=Filtro+Suzuki",
+                category: "destaques",
+                badge: "PERFORMANCE"
+            },
+            {
+                id: 15,
+                brand: "Honda",
+                name: "Disco de Freio Dianteiro",
+                specs: "Disco de freio dianteiro | Original Honda",
+                cashPrice: "R$ 199,90 à vista",
+                installmentPrice: "ou 5x de R$ 39,98",
+                image: "https://via.placeholder.com/300x300?text=Disco+Honda",
+                category: "destaques",
+                badge: "ORIGINAL"
+            },
+            {
+                id: 16,
+                brand: "Yamaha",
+                name: "Câmbio Completo",
+                specs: "Câmbio completo | Compatível com várias modelos",
+                cashPrice: "R$ 399,90 à vista",
+                installmentPrice: "ou 8x de R$ 49,99",
+                image: "https://via.placeholder.com/300x300?text=Cambio+Yamaha",
+                category: "destaques",
+                badge: "PEÇA"
+            },
+            {
+                id: 17,
+                brand: "Bell",
+                name: "Capacete Integral",
+                specs: "Capacete integral | Tamanhos P-M-G-GG | Certificado INMETRO",
+                cashPrice: "R$ 299,90 à vista",
+                installmentPrice: "ou 6x de R$ 49,98",
+                image: "https://via.placeholder.com/300x300?text=Capacete+Bell",
+                category: "top-sellers",
+                badge: "SEGURANÇA"
+            },
+            {
+                id: 18,
+                brand: "Castrol",
+                name: "Óleo 10W40 Sintético",
+                specs: "Óleo para motor 10W40 | 1 litro | Sintético",
+                cashPrice: "R$ 49,90 à vista",
+                installmentPrice: "ou 2x de R$ 24,95",
+                image: "https://via.placeholder.com/300x300?text=Oleo+Castrol",
+                category: "top-sellers",
+                badge: "OFERTA"
+            },
+            {
+                id: 19,
+                brand: "Michelin",
+                name: "Pneu Traseiro 140/70-17",
+                specs: "Pneu traseiro esportivo | Medida 140/70-17",
+                cashPrice: "R$ 399,90 à vista",
+                installmentPrice: "ou 8x de R$ 49,99",
+                image: "https://via.placeholder.com/300x300?text=Pneu+Michelin",
+                category: "top-sellers",
+                badge: "QUALIDADE"
+            },
+            {
+                id: 20,
+                brand: "Nolan",
+                name: "Capacete Modular",
+                specs: "Capacete modular | Visor anti-risco | Certificado INMETRO",
+                cashPrice: "R$ 499,90 à vista",
+                installmentPrice: "ou 10x de R$ 49,99",
+                image: "https://via.placeholder.com/300x300?text=Capacete+Nolan",
+                category: "top-sellers",
+                badge: "PREMIUM"
+            },
+            {
+                id: 21,
+                brand: "Honda",
+                name: "Velas de Ignição NGK",
+                specs: "Kit com 4 velas de ignição | Original NGK",
+                cashPrice: "R$ 89,90 à vista",
+                installmentPrice: "ou 3x de R$ 29,97",
+                image: "https://via.placeholder.com/300x300?text=Velas+Honda",
+                category: "top-sellers",
+                badge: "OFERTA"
+            },
+            {
+                id: 22,
+                brand: "Yamaha",
+                name: "Cabos de Vela",
+                specs: "Cabos de vela de alta performance | Kit completo",
+                cashPrice: "R$ 129,90 à vista",
+                installmentPrice: "ou 4x de R$ 32,48",
+                image: "https://via.placeholder.com/300x300?text=Cabos+Yamaha",
+                category: "top-sellers",
+                badge: "PERFORMANCE"
+            },
+            {
+                id: 23,
+                brand: "Kawasaki",
+                name: "Sensor de Temperatura",
+                specs: "Sensor de temperatura original | Compatível com vários modelos",
+                cashPrice: "R$ 159,90 à vista",
+                installmentPrice: "ou 5x de R$ 31,98",
+                image: "https://via.placeholder.com/300x300?text=Sensor+Kawasaki",
+                category: "top-sellers",
+                badge: "LANÇAMENTO"
+            },
+            {
+                id: 24,
+                brand: "Suzuki",
+                name: "Bateria GS 12V",
+                specs: "Bateria 12V 8Ah | Selada e livre de manutenção",
+                cashPrice: "R$ 199,90 à vista",
+                installmentPrice: "ou 6x de R$ 33,32",
+                image: "https://via.placeholder.com/300x300?text=Bateria+Suzuki",
+                category: "top-sellers",
+                badge: "MAIS VENDIDO"
+            },
+            {
+                id: 25,
+                brand: "Honda",
+                name: "Correia Dentada",
+                specs: "Correia dentada original | Compatível com vários modelos",
+                cashPrice: "R$ 149,90 à vista",
+                installmentPrice: "ou 5x de R$ 29,98",
+                image: "https://via.placeholder.com/300x300?text=Correia+Honda",
+                category: "top-sellers",
+                badge: "ORIGINAL"
+            }
+        ];
+
+        // Configurações de paginação
+        const productsPerPage = 15; // Limite de 15 produtos por página
+        let currentFeaturedPage = 1;
+        let currentSellersPage = 1;
+
+        // Função para criar card de produto
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.brand} ${product.name}">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">${product.brand}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-specs">${product.specs}</div>
+                        <div class="product-pricing">
+                            <div class="cash-price">${product.cashPrice}</div>
+                            <div class="installment-price">${product.installmentPrice}</div>
+                            <button class="buy-button" onclick="addToCart(${product.id})">COMPRAR</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para criar controles de paginação
+        function createPagination(totalItems, itemsPerPage, currentPage, paginationId, pageType) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            let paginationHTML = '';
+            
+            if (totalPages <= 1) return '';
+            
+            // Botão Anterior
+            if (currentPage > 1) {
+                paginationHTML += `<a href="#" onclick="changePage(${currentPage - 1}, '${pageType}'); return false;">&laquo; Anterior</a>`;
+            } else {
+                paginationHTML += `<a class="disabled">&laquo; Anterior</a>`;
+            }
+            
+            // Páginas
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            if (startPage > 1) {
+                paginationHTML += `<a href="#" onclick="changePage(1, '${pageType}'); return false;">1</a>`;
+                if (startPage > 2) {
+                    paginationHTML += `<span>...</span>`;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<a href="#" class="active" onclick="return false;">${i}</a>`;
+                } else {
+                    paginationHTML += `<a href="#" onclick="changePage(${i}, '${pageType}'); return false;">${i}</a>`;
+                }
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<span>...</span>`;
+                }
+                paginationHTML += `<a href="#" onclick="changePage(${totalPages}, '${pageType}'); return false;">${totalPages}</a>`;
+            }
+            
+            // Botão Próximo
+            if (currentPage < totalPages) {
+                paginationHTML += `<a href="#" onclick="changePage(${currentPage + 1}, '${pageType}'); return false;">Próximo &raquo;</a>`;
+            } else {
+                paginationHTML += `<a class="disabled">Próximo &raquo;</a>`;
+            }
+            
+            document.getElementById(paginationId).innerHTML = paginationHTML;
+        }
+
+        // Função para mudar de página
+        function changePage(pageNumber, pageType) {
+            if (pageType === 'featured') {
+                currentFeaturedPage = pageNumber;
+            } else {
+                currentSellersPage = pageNumber;
+            }
+            loadProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Função para carregar produtos com paginação
+        function loadProducts() {
+            const featuredOffers = document.getElementById('featured-offers');
+            const topSellers = document.getElementById('top-sellers');
+            
+            // Filtra produtos por categoria
+            const featuredProducts = products.filter(p => p.category === "destaques");
+            const topSellerProducts = products.filter(p => p.category === "top-sellers");
+            
+            // Calcula os produtos para a página atual
+            const featuredStart = (currentFeaturedPage - 1) * productsPerPage;
+            const featuredEnd = featuredStart + productsPerPage;
+            const paginatedFeatured = featuredProducts.slice(featuredStart, featuredEnd);
+            
+            const sellersStart = (currentSellersPage - 1) * productsPerPage;
+            const sellersEnd = sellersStart + productsPerPage;
+            const paginatedSellers = topSellerProducts.slice(sellersStart, sellersEnd);
+            
+            // Limpa e adiciona os produtos ao DOM
+            featuredOffers.innerHTML = '';
+            paginatedFeatured.forEach(product => {
+                featuredOffers.innerHTML += createProductCard(product);
+            });
+            
+            topSellers.innerHTML = '';
+            paginatedSellers.forEach(product => {
+                topSellers.innerHTML += createProductCard(product);
+            });
+            
+            // Cria a paginação
+            createPagination(featuredProducts.length, productsPerPage, currentFeaturedPage, 'featured-pagination', 'featured');
+            createPagination(topSellerProducts.length, productsPerPage, currentSellersPage, 'sellers-pagination', 'sellers');
+        }
+
+        // Função para adicionar ao carrinho
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            alert(`${product.brand} ${product.name} adicionado ao carrinho!\nValor: ${product.cashPrice}`);
+        }
+
+        // Fechar cookie consent
+        document.querySelector('.cookie-btn').addEventListener('click', function() {
+            document.querySelector('.cookie-consent').style.display = 'none';
+        });
+
+        // Carrega os produtos quando a página é carregada
+        window.onload = loadProducts;
+    </script>
+</body>
+</html>
