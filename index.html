@@ -329,6 +329,40 @@
             background-color: var(--laranja-lima);
         }
         
+        /* Paginação */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--branco);
+            color: var(--preto);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .pagination a:hover,
+        .pagination a.active {
+            background-color: var(--verde-lima);
+            color: var(--branco);
+            border-color: var(--verde-lima);
+        }
+        
+        .pagination a.disabled {
+            color: #ccc;
+            pointer-events: none;
+            background-color: #f5f5f5;
+        }
+        
         /* Rodapé */
         footer {
             background-color: var(--preto);
@@ -416,7 +450,7 @@
         
         .payment-methods {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr));
             gap: 8px;
             margin-top: 15px;
         }
@@ -529,7 +563,7 @@
             }
             
             .payment-methods {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr));
             }
             
             .cookie-consent {
@@ -557,12 +591,17 @@
             }
             
             .payment-methods {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr));
             }
             
             .menu-list li a {
                 padding: 8px 10px;
                 font-size: 12px;
+            }
+            
+            .pagination a {
+                padding: 6px 10px;
+                font-size: 14px;
             }
         }
     </style>
@@ -627,6 +666,7 @@
             <div class="products-grid" id="featured-offers">
                 <!-- Os produtos serão inseridos via JavaScript -->
             </div>
+            <div class="pagination" id="featured-pagination"></div>
         </section>
         
         <section class="featured-section">
@@ -634,6 +674,7 @@
             <div class="products-grid" id="top-sellers">
                 <!-- Os produtos serão inseridos via JavaScript -->
             </div>
+            <div class="pagination" id="sellers-pagination"></div>
         </section>
     </main>
 
@@ -714,68 +755,34 @@
     </div>
 
     <script>
-        // Função para obter produtos do localStorage
-        function getProducts() {
-            const products = JSON.parse(localStorage.getItem('limaMotosProducts')) || [];
-            
-            // Se não houver produtos, adiciona alguns exemplos
-            if (products.length === 0) {
-                const defaultProducts = [
-                    {
-                        id: 1,
-                        name: "Kit Corrente 428 - CG 150/160",
-                        brand: "Honda",
-                        category: "peças",
-                        price: 129.90,
-                        stock: 15,
-                        description: "Kit corrente original Honda para CG 150/160 Titan",
-                        image: "https://via.placeholder.com/300x300?text=Kit+Corrente+CG"
-                    },
-                    {
-                        id: 2,
-                        name: "Pneu Dianteiro 90/90-18",
-                        brand: "Yamaha",
-                        category: "pneus",
-                        price: 219.90,
-                        stock: 8,
-                        description: "Pneu dianteiro para Factor 150 | Medida 90/90-18",
-                        image: "https://via.placeholder.com/300x300?text=Pneu+Yamaha"
-                    },
-                    {
-                        id: 3,
-                        name: "Capacete Jet Preto",
-                        brand: "Fox",
-                        category: "vestuario",
-                        price: 189.90,
-                        stock: 5,
-                        description: "Capacete estilo jet | Tamanhos P-M-G | Certificado INMETRO",
-                        image: "https://via.placeholder.com/300x300?text=Capacete+Fox"
-                    }
-                ];
-                localStorage.setItem('limaMotosProducts', JSON.stringify(defaultProducts));
-                return defaultProducts;
-            }
-            return products;
+        // Configurações de paginação
+        const productsPerPage = 15;
+        let currentFeaturedPage = 1;
+        let currentSellersPage = 1;
+
+        // Função para formatar preço
+        function formatPrice(price) {
+            return `R$ ${price.toFixed(2).replace('.', ',')}`;
         }
 
         // Função para criar card de produto
         function createProductCard(product) {
-            const installment = (product.price / 3).toFixed(2).replace('.', ',');
-            const price = product.price.toFixed(2).replace('.', ',');
+            const cashPrice = formatPrice(product.price);
+            const installmentPrice = `ou ${Math.ceil(product.price / 30)}x de ${formatPrice(product.price / 30)}`;
             
             return `
                 <div class="product-card">
                     <div class="product-image">
                         <img src="${product.image || 'https://via.placeholder.com/300x300?text=Produto+Lima+Motos'}" alt="${product.brand} ${product.name}">
-                        <div class="product-badge">DESTAQUE</div>
+                        ${product.stock < 5 ? `<div class="product-badge">ESGOTANDO</div>` : ''}
                     </div>
                     <div class="product-info">
                         <div class="product-brand">${product.brand}</div>
                         <div class="product-name">${product.name}</div>
-                        <div class="product-specs">${product.description || 'Produto de qualidade para sua moto'}</div>
+                        <div class="product-specs">${product.description || 'Produto de qualidade para sua motocicleta'}</div>
                         <div class="product-pricing">
-                            <div class="cash-price">R$ ${price} à vista</div>
-                            <div class="installment-price">ou 3x de R$ ${installment}</div>
+                            <div class="cash-price">${cashPrice} à vista</div>
+                            <div class="installment-price">${installmentPrice}</div>
                             <button class="buy-button" onclick="addToCart(${product.id})">COMPRAR</button>
                         </div>
                     </div>
@@ -783,38 +790,121 @@
             `;
         }
 
-        // Função para carregar produtos
+        // Função para carregar produtos do localStorage
+        function getProductsFromStorage() {
+            const storedProducts = localStorage.getItem('limaMotosProducts');
+            return storedProducts ? JSON.parse(storedProducts) : [];
+        }
+
+        // Função para criar controles de paginação
+        function createPagination(totalItems, itemsPerPage, currentPage, paginationId, pageType) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            let paginationHTML = '';
+            
+            if (totalPages <= 1) return '';
+            
+            // Botão Anterior
+            if (currentPage > 1) {
+                paginationHTML += `<a href="#" onclick="changePage(${currentPage - 1}, '${pageType}'); return false;">&laquo; Anterior</a>`;
+            } else {
+                paginationHTML += `<a class="disabled">&laquo; Anterior</a>`;
+            }
+            
+            // Páginas
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            if (startPage > 1) {
+                paginationHTML += `<a href="#" onclick="changePage(1, '${pageType}'); return false;">1</a>`;
+                if (startPage > 2) {
+                    paginationHTML += `<span>...</span>`;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<a href="#" class="active" onclick="return false;">${i}</a>`;
+                } else {
+                    paginationHTML += `<a href="#" onclick="changePage(${i}, '${pageType}'); return false;">${i}</a>`;
+                }
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<span>...</span>`;
+                }
+                paginationHTML += `<a href="#" onclick="changePage(${totalPages}, '${pageType}'); return false;">${totalPages}</a>`;
+            }
+            
+            // Botão Próximo
+            if (currentPage < totalPages) {
+                paginationHTML += `<a href="#" onclick="changePage(${currentPage + 1}, '${pageType}'); return false;">Próximo &raquo;</a>`;
+            } else {
+                paginationHTML += `<a class="disabled">Próximo &raquo;</a>`;
+            }
+            
+            document.getElementById(paginationId).innerHTML = paginationHTML;
+        }
+
+        // Função para mudar de página
+        function changePage(pageNumber, pageType) {
+            if (pageType === 'featured') {
+                currentFeaturedPage = pageNumber;
+            } else {
+                currentSellersPage = pageNumber;
+            }
+            loadProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Função para carregar produtos com paginação
         function loadProducts() {
             const featuredOffers = document.getElementById('featured-offers');
             const topSellers = document.getElementById('top-sellers');
             
-            // Limpa qualquer conteúdo existente
-            featuredOffers.innerHTML = '';
-            topSellers.innerHTML = '';
-            
             // Obtém produtos do localStorage
-            const products = getProducts();
+            const allProducts = getProductsFromStorage();
             
-            // Filtra produtos para as seções
-            const featuredProducts = products.slice(0, 4); // Primeiros 4 como destaques
-            const topSellerProducts = products.slice(-4); // Últimos 4 como mais vendidos
+            // Divide os produtos em destaque e mais vendidos (você pode adicionar lógica para categorizar)
+            const featuredProducts = allProducts.slice(0, Math.ceil(allProducts.length / 2));
+            const topSellerProducts = allProducts.slice(Math.ceil(allProducts.length / 2));
             
-            // Adiciona produtos ao DOM
-            featuredProducts.forEach(product => {
+            // Calcula os produtos para a página atual
+            const featuredStart = (currentFeaturedPage - 1) * productsPerPage;
+            const featuredEnd = featuredStart + productsPerPage;
+            const paginatedFeatured = featuredProducts.slice(featuredStart, featuredEnd);
+            
+            const sellersStart = (currentSellersPage - 1) * productsPerPage;
+            const sellersEnd = sellersStart + productsPerPage;
+            const paginatedSellers = topSellerProducts.slice(sellersStart, sellersEnd);
+            
+            // Limpa e adiciona os produtos ao DOM
+            featuredOffers.innerHTML = '';
+            paginatedFeatured.forEach(product => {
                 featuredOffers.innerHTML += createProductCard(product);
             });
             
-            topSellerProducts.forEach(product => {
+            topSellers.innerHTML = '';
+            paginatedSellers.forEach(product => {
                 topSellers.innerHTML += createProductCard(product);
             });
+            
+            // Cria a paginação
+            createPagination(featuredProducts.length, productsPerPage, currentFeaturedPage, 'featured-pagination', 'featured');
+            createPagination(topSellerProducts.length, productsPerPage, currentSellersPage, 'sellers-pagination', 'sellers');
         }
 
         // Função para adicionar ao carrinho
         function addToCart(productId) {
-            const products = getProducts();
+            const products = getProductsFromStorage();
             const product = products.find(p => p.id === productId);
             if (product) {
-                alert(`${product.brand} ${product.name} adicionado ao carrinho!\nValor: R$ ${product.price.toFixed(2).replace('.', ',')}`);
+                alert(`${product.brand} ${product.name} adicionado ao carrinho!\nValor: ${formatPrice(product.price)}`);
             }
         }
 
