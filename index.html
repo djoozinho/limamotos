@@ -333,7 +333,7 @@
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
+            margin: 30px 0;
             gap: 10px;
             flex-wrap: wrap;
         }
@@ -449,33 +449,53 @@
         }
         
         .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr));
-            gap: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-top: 15px;
         }
         
         .payment-method {
-            background-color: #444;
+            background-color: #333;
             color: var(--branco);
-            padding: 5px;
+            padding: 8px 12px;
             border-radius: 4px;
             font-size: 12px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+            background-color: var(--verde-lima);
+        }
+        
+        .payment-method i {
+            font-size: 16px;
         }
         
         .security-badges {
             display: flex;
             gap: 10px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
         
         .security-badge {
-            background-color: #444;
+            background-color: #333;
             color: var(--branco);
-            padding: 5px 10px;
+            padding: 8px 12px;
             border-radius: 4px;
             font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .security-badge i {
+            color: var(--laranja-lima);
         }
         
         /* Cookie Consent */
@@ -563,7 +583,7 @@
             }
             
             .payment-methods {
-                grid-template-columns: repeat(2, 1fr));
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .cookie-consent {
@@ -591,7 +611,7 @@
             }
             
             .payment-methods {
-                grid-template-columns: repeat(3, 1fr));
+                grid-template-columns: 1fr;
             }
             
             .menu-list li a {
@@ -662,19 +682,11 @@
         </div>
         
         <section class="featured-section">
-            <h2 class="section-title">DESTAQUES DA LOJA</h2>
+            <h2 class="section-title">PRODUTOS EM DESTAQUE</h2>
             <div class="products-grid" id="featured-offers">
                 <!-- Os produtos serão inseridos via JavaScript -->
             </div>
-            <div class="pagination" id="featured-pagination"></div>
-        </section>
-        
-        <section class="featured-section">
-            <h2 class="section-title">ACESSÓRIOS MAIS VENDIDOS</h2>
-            <div class="products-grid" id="top-sellers">
-                <!-- Os produtos serão inseridos via JavaScript -->
-            </div>
-            <div class="pagination" id="sellers-pagination"></div>
+            <div class="pagination" id="pagination"></div>
         </section>
     </main>
 
@@ -723,19 +735,21 @@
             <div class="footer-section">
                 <h3 class="footer-title">FORMAS DE PAGAMENTO</h3>
                 <div class="payment-methods">
-                    <span class="payment-method">VISA</span>
-                    <span class="payment-method">MASTERCARD</span>
-                    <span class="payment-method">ELO</span>
-                    <span class="payment-method">PIX</span>
-                    <span class="payment-method">BOLETO</span>
-                    <span class="payment-method">TRANSFERÊNCIA</span>
+                    <span class="payment-method"><i class="fab fa-cc-visa"></i> VISA</span>
+                    <span class="payment-method"><i class="fab fa-cc-mastercard"></i> MASTERCARD</span>
+                    <span class="payment-method"><i class="fab fa-cc-amex"></i> AMEX</span>
+                    <span class="payment-method"><i class="fab fa-cc-discover"></i> DISCOVER</span>
+                    <span class="payment-method"><i class="fas fa-barcode"></i> BOLETO</span>
+                    <span class="payment-method"><i class="fas fa-money-bill-wave"></i> DINHEIRO</span>
+                    <span class="payment-method"><i class="fas fa-pix"></i> PIX</span>
+                    <span class="payment-method"><i class="fas fa-university"></i> TRANSFERÊNCIA</span>
                 </div>
                 
                 <h3 class="footer-title" style="margin-top: 20px;">COMPRE COM SEGURANÇA</h3>
                 <div class="security-badges">
-                    <span class="security-badge">SSL</span>
-                    <span class="security-badge">SITE SEGURO</span>
-                    <span class="security-badge">DADOS PROTEGIDOS</span>
+                    <span class="security-badge"><i class="fas fa-lock"></i> SSL</span>
+                    <span class="security-badge"><i class="fas fa-shield-alt"></i> SITE SEGURO</span>
+                    <span class="security-badge"><i class="fas fa-user-shield"></i> DADOS PROTEGIDOS</span>
                 </div>
             </div>
         </div>
@@ -756,9 +770,8 @@
 
     <script>
         // Configurações de paginação
-        const productsPerPage = 15;
-        let currentFeaturedPage = 1;
-        let currentSellersPage = 1;
+        const productsPerPage = 10;
+        let currentPage = 1;
 
         // Função para formatar preço
         function formatPrice(price) {
@@ -797,7 +810,7 @@
         }
 
         // Função para criar controles de paginação
-        function createPagination(totalItems, itemsPerPage, currentPage, paginationId, pageType) {
+        function createPagination(totalItems, itemsPerPage, currentPage) {
             const totalPages = Math.ceil(totalItems / itemsPerPage);
             let paginationHTML = '';
             
@@ -805,7 +818,7 @@
             
             // Botão Anterior
             if (currentPage > 1) {
-                paginationHTML += `<a href="#" onclick="changePage(${currentPage - 1}, '${pageType}'); return false;">&laquo; Anterior</a>`;
+                paginationHTML += `<a href="#" onclick="changePage(${currentPage - 1}); return false;">&laquo; Anterior</a>`;
             } else {
                 paginationHTML += `<a class="disabled">&laquo; Anterior</a>`;
             }
@@ -820,7 +833,7 @@
             }
             
             if (startPage > 1) {
-                paginationHTML += `<a href="#" onclick="changePage(1, '${pageType}'); return false;">1</a>`;
+                paginationHTML += `<a href="#" onclick="changePage(1); return false;">1</a>`;
                 if (startPage > 2) {
                     paginationHTML += `<span>...</span>`;
                 }
@@ -830,7 +843,7 @@
                 if (i === currentPage) {
                     paginationHTML += `<a href="#" class="active" onclick="return false;">${i}</a>`;
                 } else {
-                    paginationHTML += `<a href="#" onclick="changePage(${i}, '${pageType}'); return false;">${i}</a>`;
+                    paginationHTML += `<a href="#" onclick="changePage(${i}); return false;">${i}</a>`;
                 }
             }
             
@@ -838,26 +851,22 @@
                 if (endPage < totalPages - 1) {
                     paginationHTML += `<span>...</span>`;
                 }
-                paginationHTML += `<a href="#" onclick="changePage(${totalPages}, '${pageType}'); return false;">${totalPages}</a>`;
+                paginationHTML += `<a href="#" onclick="changePage(${totalPages}); return false;">${totalPages}</a>`;
             }
             
             // Botão Próximo
             if (currentPage < totalPages) {
-                paginationHTML += `<a href="#" onclick="changePage(${currentPage + 1}, '${pageType}'); return false;">Próximo &raquo;</a>`;
+                paginationHTML += `<a href="#" onclick="changePage(${currentPage + 1}); return false;">Próximo &raquo;</a>`;
             } else {
                 paginationHTML += `<a class="disabled">Próximo &raquo;</a>`;
             }
             
-            document.getElementById(paginationId).innerHTML = paginationHTML;
+            document.getElementById('pagination').innerHTML = paginationHTML;
         }
 
         // Função para mudar de página
-        function changePage(pageNumber, pageType) {
-            if (pageType === 'featured') {
-                currentFeaturedPage = pageNumber;
-            } else {
-                currentSellersPage = pageNumber;
-            }
+        function changePage(pageNumber) {
+            currentPage = pageNumber;
             loadProducts();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -865,38 +874,23 @@
         // Função para carregar produtos com paginação
         function loadProducts() {
             const featuredOffers = document.getElementById('featured-offers');
-            const topSellers = document.getElementById('top-sellers');
             
             // Obtém produtos do localStorage
             const allProducts = getProductsFromStorage();
             
-            // Divide os produtos em destaque e mais vendidos (você pode adicionar lógica para categorizar)
-            const featuredProducts = allProducts.slice(0, Math.ceil(allProducts.length / 2));
-            const topSellerProducts = allProducts.slice(Math.ceil(allProducts.length / 2));
-            
             // Calcula os produtos para a página atual
-            const featuredStart = (currentFeaturedPage - 1) * productsPerPage;
-            const featuredEnd = featuredStart + productsPerPage;
-            const paginatedFeatured = featuredProducts.slice(featuredStart, featuredEnd);
-            
-            const sellersStart = (currentSellersPage - 1) * productsPerPage;
-            const sellersEnd = sellersStart + productsPerPage;
-            const paginatedSellers = topSellerProducts.slice(sellersStart, sellersEnd);
+            const start = (currentPage - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const paginatedProducts = allProducts.slice(start, end);
             
             // Limpa e adiciona os produtos ao DOM
             featuredOffers.innerHTML = '';
-            paginatedFeatured.forEach(product => {
+            paginatedProducts.forEach(product => {
                 featuredOffers.innerHTML += createProductCard(product);
             });
             
-            topSellers.innerHTML = '';
-            paginatedSellers.forEach(product => {
-                topSellers.innerHTML += createProductCard(product);
-            });
-            
             // Cria a paginação
-            createPagination(featuredProducts.length, productsPerPage, currentFeaturedPage, 'featured-pagination', 'featured');
-            createPagination(topSellerProducts.length, productsPerPage, currentSellersPage, 'sellers-pagination', 'sellers');
+            createPagination(allProducts.length, productsPerPage, currentPage);
         }
 
         // Função para adicionar ao carrinho
