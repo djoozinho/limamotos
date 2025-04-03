@@ -6,156 +6,6 @@
     <title>Lima Motos - Peças e Acessórios para Motocicletas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Modal de Login/Cadastro */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    overflow: auto;
-}
-
-.modal-content {
-    background-color: var(--branco);
-    margin: 5% auto;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    animation: modalFadeIn 0.3s;
-}
-
-@keyframes modalFadeIn {
-    from {opacity: 0; transform: translateY(-50px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 24px;
-    color: var(--cinza-escuro);
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.close-modal:hover {
-    color: var(--laranja-lima);
-}
-
-.modal-tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.modal-tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--cinza-escuro);
-    transition: all 0.3s;
-    border-bottom: 3px solid transparent;
-}
-
-.modal-tab.active {
-    color: var(--laranja-lima);
-    border-bottom: 3px solid var(--laranja-lima);
-}
-
-.modal-tab:hover:not(.active) {
-    color: var(--verde-lima);
-}
-
-.modal-form {
-    display: none;
-}
-
-.modal-form.active {
-    display: block;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--preto);
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: border 0.3s;
-}
-
-.form-group input:focus {
-    border-color: var(--verde-lima);
-    outline: none;
-}
-
-.form-actions {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.form-actions button {
-    padding: 12px 25px;
-    background-color: var(--verde-lima);
-    color: var(--branco);
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.form-actions button:hover {
-    background-color: var(--laranja-lima);
-}
-
-.form-footer {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-    color: var(--cinza-escuro);
-}
-
-.form-footer a {
-    color: var(--laranja-lima);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.form-footer a:hover {
-    text-decoration: underline;
-}
-
-.forgot-password {
-    font-size: 14px;
-    color: var(--cinza-escuro);
-    text-decoration: none;
-}
-
-.forgot-password:hover {
-    color: var(--laranja-lima);
-    text-decoration: underline;
-}
         /* Cores personalizadas */
         :root {
             --verde-lima: #8bc34a;
@@ -689,6 +539,157 @@
         .cookie-btn:hover {
             background-color: var(--laranja-lima);
         }
+
+        /* Modal de Login/Cadastro */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: var(--branco);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: var(--cinza-escuro);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--laranja-lima);
+        }
+
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--cinza-escuro);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .modal-tab.active {
+            color: var(--laranja-lima);
+            border-bottom: 3px solid var(--laranja-lima);
+        }
+
+        .modal-tab:hover:not(.active) {
+            color: var(--verde-lima);
+        }
+
+        .modal-form {
+            display: none;
+        }
+
+        .modal-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--preto);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--verde-lima);
+            outline: none;
+        }
+
+        .form-actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-actions button {
+            padding: 12px 25px;
+            background-color: var(--verde-lima);
+            color: var(--branco);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-actions button:hover {
+            background-color: var(--laranja-lima);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--cinza-escuro);
+        }
+
+        .form-footer a {
+            color: var(--laranja-lima);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            font-size: 14px;
+            color: var(--cinza-escuro);
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            color: var(--laranja-lima);
+            text-decoration: underline;
+        }
         
         /* Responsividade */
         @media (max-width: 992px) {
@@ -803,7 +804,7 @@
                     </form>
                 </div>
                 <div class="user-actions">
-                    <a href="#"><i class="fas fa-user"></i> Minha Conta</a>
+                    <a href="#" id="accountLink"><i class="fas fa-user"></i> Minha Conta</a>
                     <a href="#"><i class="fas fa-shopping-cart"></i> Carrinho</a>
                 </div>
             </div>
@@ -916,6 +917,76 @@
             Nós utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com nossa <a href="#">Política de Privacidade</a> e <a href="#">Política de Cookies</a>.
         </div>
         <button class="cookie-btn">ACEITAR COOKIES</button>
+    </div>
+
+    <!-- Modal de Login/Cadastro -->
+    <div id="accountModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="login">Login</div>
+                <div class="modal-tab" data-tab="register">Cadastre-se</div>
+            </div>
+            
+            <!-- Formulário de Login -->
+            <form id="loginForm" class="modal-form active">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="#" class="forgot-password">Esqueci minha senha</a>
+                    <button type="submit">Entrar</button>
+                </div>
+                
+                <div class="form-footer">
+                    Não tem uma conta? <a href="#" class="switch-tab" data-tab="register">Cadastre-se</a>
+                </div>
+            </form>
+            
+            <!-- Formulário de Cadastro -->
+            <form id="registerForm" class="modal-form">
+                <div class="form-group">
+                    <label for="registerName">Nome Completo</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">E-mail</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPhone">Telefone</label>
+                    <input type="tel" id="registerPhone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Senha</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirme sua Senha</label>
+                    <input type="password" id="registerConfirmPassword" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit">Cadastrar</button>
+                </div>
+                
+                <div class="form-footer">
+                    Já tem uma conta? <a href="#" class="switch-tab" data-tab="login">Faça login</a>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -1056,190 +1127,122 @@
         document.querySelector('.cookie-btn').addEventListener('click', function() {
             document.querySelector('.cookie-consent').style.display = 'none';
         });
+
         // Modal de Login/Cadastro
-const accountLink = document.querySelector('.user-actions a[href="#"]:first-child');
-const modal = document.getElementById('accountModal');
-const closeModal = document.querySelector('.close-modal');
-const modalTabs = document.querySelectorAll('.modal-tab');
-const modalForms = document.querySelectorAll('.modal-form');
-const switchTabLinks = document.querySelectorAll('.switch-tab');
+        const accountLink = document.getElementById('accountLink');
+        const modal = document.getElementById('accountModal');
+        const closeModal = document.querySelector('.close-modal');
+        const modalTabs = document.querySelectorAll('.modal-tab');
+        const modalForms = document.querySelectorAll('.modal-form');
+        const switchTabLinks = document.querySelectorAll('.switch-tab');
 
-// Abrir modal ao clicar em Minha Conta
-accountLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Previne scroll da página
-});
+        // Abrir modal ao clicar em Minha Conta
+        accountLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Previne scroll da página
+        });
 
-// Fechar modal
-closeModal.addEventListener('click', function() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
+        // Fechar modal
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
 
-// Fechar modal ao clicar fora dele
-window.addEventListener('click', function(e) {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
+        // Fechar modal ao clicar fora dele
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
 
-// Trocar entre abas
-modalTabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-        const tabId = this.getAttribute('data-tab');
-        
-        // Ativar aba clicada
-        modalTabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Mostrar formulário correspondente
-        modalForms.forEach(form => form.classList.remove('active'));
-        document.getElementById(`${tabId}Form`).classList.add('active');
-    });
-});
+        // Trocar entre abas
+        modalTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Ativar aba clicada
+                modalTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Mostrar formulário correspondente
+                modalForms.forEach(form => form.classList.remove('active'));
+                document.getElementById(`${tabId}Form`).classList.add('active');
+            });
+        });
 
-// Links para trocar de aba
-switchTabLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const tabId = this.getAttribute('data-tab');
-        
-        // Ativar aba correspondente
-        modalTabs.forEach(t => t.classList.remove('active'));
-        document.querySelector(`.modal-tab[data-tab="${tabId}"]`).classList.add('active');
-        
-        // Mostrar formulário correspondente
-        modalForms.forEach(form => form.classList.remove('active'));
-        document.getElementById(`${tabId}Form`).classList.add('active');
-    });
-});
+        // Links para trocar de aba
+        switchTabLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabId = this.getAttribute('data-tab');
+                
+                // Ativar aba correspondente
+                modalTabs.forEach(t => t.classList.remove('active'));
+                document.querySelector(`.modal-tab[data-tab="${tabId}"]`).classList.add('active');
+                
+                // Mostrar formulário correspondente
+                modalForms.forEach(form => form.classList.remove('active'));
+                document.getElementById(`${tabId}Form`).classList.add('active');
+            });
+        });
 
-// Simular login
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    
-    // Validação simples
-    if (email && password) {
-        alert(`Bem-vindo de volta, ${email}!`);
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        
-        // Aqui você pode adicionar a lógica real de login
-    } else {
-        alert('Por favor, preencha todos os campos.');
-    }
-});
+        // Simular login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Validação simples
+            if (email && password) {
+                alert(`Bem-vindo de volta, ${email}!`);
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                
+                // Aqui você pode adicionar a lógica real de login
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
 
-// Simular cadastro
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('registerName').value;
-    const email = document.getElementById('registerEmail').value;
-    const phone = document.getElementById('registerPhone').value;
-    const password = document.getElementById('registerPassword').value;
-    const confirmPassword = document.getElementById('registerConfirmPassword').value;
-    
-    // Validação simples
-    if (!name || !email || !phone || !password || !confirmPassword) {
-        alert('Por favor, preencha todos os campos.');
-        return;
-    }
-    
-    if (password !== confirmPassword) {
-        alert('As senhas não coincidem.');
-        return;
-    }
-    
-    // Simular cadastro bem-sucedido
-    alert(`Cadastro realizado com sucesso, ${name}! Agora você pode fazer login.`);
-    
-    // Mudar para a aba de login
-    modalTabs.forEach(t => t.classList.remove('active'));
-    document.querySelector('.modal-tab[data-tab="login"]').classList.add('active');
-    
-    modalForms.forEach(form => form.classList.remove('active'));
-    document.getElementById('loginForm').classList.add('active');
-    
-    // Preencher automaticamente o email no login
-    document.getElementById('loginEmail').value = email;
-    document.getElementById('loginPassword').focus();
-});
+        // Simular cadastro
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            // Validação simples
+            if (!name || !email || !phone || !password || !confirmPassword) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('As senhas não coincidem.');
+                return;
+            }
+            
+            // Simular cadastro bem-sucedido
+            alert(`Cadastro realizado com sucesso, ${name}! Agora você pode fazer login.`);
+            
+            // Mudar para a aba de login
+            modalTabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.modal-tab[data-tab="login"]').classList.add('active');
+            
+            modalForms.forEach(form => form.classList.remove('active'));
+            document.getElementById('loginForm').classList.add('active');
+            
+            // Preencher automaticamente o email no login
+            document.getElementById('loginEmail').value = email;
+            document.getElementById('loginPassword').focus();
+        });
 
         // Carrega os produtos quando a página é carregada
         window.onload = loadProducts;
     </script>
-    <!-- Modal de Login/Cadastro -->
-<div id="accountModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        
-        <div class="modal-tabs">
-            <div class="modal-tab active" data-tab="login">Login</div>
-            <div class="modal-tab" data-tab="register">Cadastre-se</div>
-        </div>
-        
-        <!-- Formulário de Login -->
-        <form id="loginForm" class="modal-form active">
-            <div class="form-group">
-                <label for="loginEmail">E-mail</label>
-                <input type="email" id="loginEmail" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="loginPassword">Senha</label>
-                <input type="password" id="loginPassword" required>
-            </div>
-            
-            <div class="form-actions">
-                <a href="#" class="forgot-password">Esqueci minha senha</a>
-                <button type="submit">Entrar</button>
-            </div>
-            
-            <div class="form-footer">
-                Não tem uma conta? <a href="#" class="switch-tab" data-tab="register">Cadastre-se</a>
-            </div>
-        </form>
-        
-        <!-- Formulário de Cadastro -->
-        <form id="registerForm" class="modal-form">
-            <div class="form-group">
-                <label for="registerName">Nome Completo</label>
-                <input type="text" id="registerName" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="registerEmail">E-mail</label>
-                <input type="email" id="registerEmail" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="registerPhone">Telefone</label>
-                <input type="tel" id="registerPhone" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="registerPassword">Senha</label>
-                <input type="password" id="registerPassword" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="registerConfirmPassword">Confirme sua Senha</label>
-                <input type="password" id="registerConfirmPassword" required>
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit">Cadastrar</button>
-            </div>
-            
-            <div class="form-footer">
-                Já tem uma conta? <a href="#" class="switch-tab" data-tab="login">Faça login</a>
-            </div>
-        </form>
-    </div>
-</div>
 </body>
 </html>
