@@ -137,6 +137,11 @@
         .user-actions i {
             margin-right: 5px;
         }
+
+        .admin-link {
+            color: var(--laranja-lima);
+            font-weight: bold;
+        }
         
         /* Menu Horizontal */
         .main-menu {
@@ -806,6 +811,7 @@
                 <div class="user-actions">
                     <a href="#" id="accountLink"><i class="fas fa-user"></i> Minha Conta</a>
                     <a href="#"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+                    <a href="admin.html" class="admin-link"><i class="fas fa-lock"></i> Admin</a>
                 </div>
             </div>
         </div>
@@ -892,7 +898,7 @@
                     <span class="payment-method"><i class="fab fa-cc-discover"></i> DISCOVER</span>
                     <span class="payment-method"><i class="fas fa-barcode"></i> BOLETO</span>
                     <span class="payment-method"><i class="fas fa-money-bill-wave"></i> DINHEIRO</span>
-                    <span class="payment-method"><i class="fas fa-pix"></i> PIX</span>
+                    <span class="payment-method"><i class="fas fa-qrcode"></i> PIX</span>
                     <span class="payment-method"><i class="fas fa-university"></i> TRANSFERÊNCIA</span>
                 </div>
                 
@@ -1120,6 +1126,22 @@
             const product = products.find(p => p.id === productId);
             if (product) {
                 alert(`${product.brand} ${product.name} adicionado ao carrinho!\nValor: ${formatPrice(product.price)}`);
+                
+                // Adiciona o cliente ao localStorage se não existir
+                const customers = JSON.parse(localStorage.getItem('limaMotosCustomers')) || [];
+                const currentCustomer = {
+                    id: customers.length + 1,
+                    name: "Cliente Anônimo",
+                    email: "anonimo@email.com",
+                    phone: "(99) 99999-9999",
+                    joinDate: new Date().toISOString().split('T')[0],
+                    orders: 1
+                };
+                
+                if (!customers.some(c => c.email === currentCustomer.email)) {
+                    customers.push(currentCustomer);
+                    localStorage.setItem('limaMotosCustomers', JSON.stringify(customers));
+                }
             }
         }
 
@@ -1200,7 +1222,22 @@
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
                 
-                // Aqui você pode adicionar a lógica real de login
+                // Adiciona o cliente ao localStorage se não existir
+                const customers = JSON.parse(localStorage.getItem('limaMotosCustomers')) || [];
+                const existingCustomer = customers.find(c => c.email === email);
+                
+                if (!existingCustomer) {
+                    const newCustomer = {
+                        id: customers.length + 1,
+                        name: email.split('@')[0],
+                        email: email,
+                        phone: "(99) 99999-9999",
+                        joinDate: new Date().toISOString().split('T')[0],
+                        orders: 1
+                    };
+                    customers.push(newCustomer);
+                    localStorage.setItem('limaMotosCustomers', JSON.stringify(customers));
+                }
             } else {
                 alert('Por favor, preencha todos os campos.');
             }
@@ -1224,6 +1261,23 @@
             if (password !== confirmPassword) {
                 alert('As senhas não coincidem.');
                 return;
+            }
+            
+            // Adicionar cliente ao localStorage
+            const customers = JSON.parse(localStorage.getItem('limaMotosCustomers')) || [];
+            const existingCustomer = customers.find(c => c.email === email);
+            
+            if (!existingCustomer) {
+                const newCustomer = {
+                    id: customers.length + 1,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    joinDate: new Date().toISOString().split('T')[0],
+                    orders: 0
+                };
+                customers.push(newCustomer);
+                localStorage.setItem('limaMotosCustomers', JSON.stringify(customers));
             }
             
             // Simular cadastro bem-sucedido
