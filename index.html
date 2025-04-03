@@ -714,113 +714,68 @@
     </div>
 
     <script>
-        // Dados dos produtos
-        const products = [
-            {
-                id: 1,
-                brand: "Honda",
-                name: "Kit Corrente 428 - CG 150/160",
-                specs: "Compatible com CG 150/160 Titan | 118 elos",
-                cashPrice: "R$ 129,90 à vista",
-                installmentPrice: "ou 3x de R$ 43,30",
-                image: "https://via.placeholder.com/300x300?text=Kit+Corrente+CG",
-                category: "destaques",
-                badge: "LANÇAMENTO"
-            },
-            {
-                id: 2,
-                brand: "Yamaha",
-                name: "Pneu Dianteiro 90/90-18",
-                specs: "Pneu dianteiro para Factor 150 | Medida 90/90-18",
-                cashPrice: "R$ 219,90 à vista",
-                installmentPrice: "ou 6x de R$ 36,65",
-                image: "https://via.placeholder.com/300x300?text=Pneu+Yamaha",
-                category: "destaques",
-                badge: "OFERTA"
-            },
-            {
-                id: 3,
-                brand: "Metzeler",
-                name: "Pneu Traseiro 110/90-18",
-                specs: "Pneu traseiro esportivo | Medida 110/90-18",
-                cashPrice: "R$ 349,90 à vista",
-                installmentPrice: "ou 10x de R$ 34,99",
-                image: "https://via.placeholder.com/300x300?text=Pneu+Metzeler",
-                category: "destaques",
-                badge: "MAIS VENDIDO"
-            },
-            {
-                id: 4,
-                brand: "Fox",
-                name: "Capacete Jet Preto",
-                specs: "Capacete estilo jet | Tamanhos P-M-G | Certificado INMETRO",
-                cashPrice: "R$ 189,90 à vista",
-                installmentPrice: "ou 5x de R$ 37,98",
-                image: "https://via.placeholder.com/300x300?text=Capacete+Fox",
-                category: "top-sellers",
-                badge: "PROMOÇÃO"
-            },
-            {
-                id: 5,
-                brand: "Alpinestars",
-                name: "Luvas Motoqueiro",
-                specs: "Luvas para motociclista | Tamanhos P-M-G-GG | Proteção em carbono",
-                cashPrice: "R$ 159,90 à vista",
-                installmentPrice: "ou 4x de R$ 39,98",
-                image: "https://via.placeholder.com/300x300?text=Luvas+Alpinestars",
-                category: "top-sellers",
-                badge: "ESGOTANDO"
-            },
-            {
-                id: 6,
-                brand: "Motul",
-                name: "Óleo 20W50 Semi-Sintético",
-                specs: "Óleo para motor 20W50 | 1 litro | Semi-sintético",
-                cashPrice: "R$ 39,90 à vista",
-                installmentPrice: "ou 2x de R$ 19,95",
-                image: "https://via.placeholder.com/300x300?text=Oleo+Motul",
-                category: "top-sellers",
-                badge: "OFERTA"
-            },
-            {
-                id: 7,
-                brand: "Shimano",
-                name: "Kit Embreagem CG 150",
-                specs: "Kit completo de embreagem para CG 150 | Original",
-                cashPrice: "R$ 89,90 à vista",
-                installmentPrice: "ou 3x de R$ 29,97",
-                image: "https://via.placeholder.com/300x300?text=Embreagem+CG",
-                category: "destaques",
-                badge: "LANÇAMENTO"
-            },
-            {
-                id: 8,
-                brand: "Dafra",
-                name: "Farol Dianteiro NH190",
-                specs: "Farol dianteiro original NH190 | Compatível com várias modelos",
-                cashPrice: "R$ 129,90 à vista",
-                installmentPrice: "ou 4x de R$ 32,48",
-                image: "https://via.placeholder.com/300x300?text=Farol+Dafra",
-                category: "destaques",
-                badge: "NOVO"
+        // Função para obter produtos do localStorage
+        function getProducts() {
+            const products = JSON.parse(localStorage.getItem('limaMotosProducts')) || [];
+            
+            // Se não houver produtos, adiciona alguns exemplos
+            if (products.length === 0) {
+                const defaultProducts = [
+                    {
+                        id: 1,
+                        name: "Kit Corrente 428 - CG 150/160",
+                        brand: "Honda",
+                        category: "peças",
+                        price: 129.90,
+                        stock: 15,
+                        description: "Kit corrente original Honda para CG 150/160 Titan",
+                        image: "https://via.placeholder.com/300x300?text=Kit+Corrente+CG"
+                    },
+                    {
+                        id: 2,
+                        name: "Pneu Dianteiro 90/90-18",
+                        brand: "Yamaha",
+                        category: "pneus",
+                        price: 219.90,
+                        stock: 8,
+                        description: "Pneu dianteiro para Factor 150 | Medida 90/90-18",
+                        image: "https://via.placeholder.com/300x300?text=Pneu+Yamaha"
+                    },
+                    {
+                        id: 3,
+                        name: "Capacete Jet Preto",
+                        brand: "Fox",
+                        category: "vestuario",
+                        price: 189.90,
+                        stock: 5,
+                        description: "Capacete estilo jet | Tamanhos P-M-G | Certificado INMETRO",
+                        image: "https://via.placeholder.com/300x300?text=Capacete+Fox"
+                    }
+                ];
+                localStorage.setItem('limaMotosProducts', JSON.stringify(defaultProducts));
+                return defaultProducts;
             }
-        ];
+            return products;
+        }
 
         // Função para criar card de produto
         function createProductCard(product) {
+            const installment = (product.price / 3).toFixed(2).replace('.', ',');
+            const price = product.price.toFixed(2).replace('.', ',');
+            
             return `
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.brand} ${product.name}">
-                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <img src="${product.image || 'https://via.placeholder.com/300x300?text=Produto+Lima+Motos'}" alt="${product.brand} ${product.name}">
+                        <div class="product-badge">DESTAQUE</div>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">${product.brand}</div>
                         <div class="product-name">${product.name}</div>
-                        <div class="product-specs">${product.specs}</div>
+                        <div class="product-specs">${product.description || 'Produto de qualidade para sua moto'}</div>
                         <div class="product-pricing">
-                            <div class="cash-price">${product.cashPrice}</div>
-                            <div class="installment-price">${product.installmentPrice}</div>
+                            <div class="cash-price">R$ ${price} à vista</div>
+                            <div class="installment-price">ou 3x de R$ ${installment}</div>
                             <button class="buy-button" onclick="addToCart(${product.id})">COMPRAR</button>
                         </div>
                     </div>
@@ -837,9 +792,12 @@
             featuredOffers.innerHTML = '';
             topSellers.innerHTML = '';
             
-            // Filtra produtos por categoria
-            const featuredProducts = products.filter(p => p.category === "destaques");
-            const topSellerProducts = products.filter(p => p.category === "top-sellers");
+            // Obtém produtos do localStorage
+            const products = getProducts();
+            
+            // Filtra produtos para as seções
+            const featuredProducts = products.slice(0, 4); // Primeiros 4 como destaques
+            const topSellerProducts = products.slice(-4); // Últimos 4 como mais vendidos
             
             // Adiciona produtos ao DOM
             featuredProducts.forEach(product => {
@@ -853,9 +811,11 @@
 
         // Função para adicionar ao carrinho
         function addToCart(productId) {
+            const products = getProducts();
             const product = products.find(p => p.id === productId);
-            alert(`${product.brand} ${product.name} adicionado ao carrinho!\nValor: ${product.cashPrice}`);
-            // Aqui você implementaria a lógica real do carrinho
+            if (product) {
+                alert(`${product.brand} ${product.name} adicionado ao carrinho!\nValor: R$ ${product.price.toFixed(2).replace('.', ',')}`);
+            }
         }
 
         // Fechar cookie consent
@@ -866,43 +826,5 @@
         // Carrega os produtos quando a página é carregada
         window.onload = loadProducts;
     </script>
-	<!-- Adicione isto antes do </body> -->
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-<script>
-  const mp = new MercadoPago('SUA_CHAVE_PUBLICA', {
-    locale: 'pt-BR'
-  });
-
-  // Configure cada botão de compra para chamar esta função
-  function initCheckout(productId) {
-    // Busca os dados do produto
-    const product = products.find(p => p.id === productId);
-    
-    // Cria a preferência de pagamento
-    fetch("/create-preference", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: product.brand + " " + product.name,
-        unit_price: parseFloat(product.cashPrice.replace("R$ ", "").replace(",", ".")),
-        quantity: 1,
-      }),
-    })
-    .then(response => response.json())
-    .then(preference => {
-      mp.checkout({
-        preference: {
-          id: preference.id
-        },
-        render: {
-          container: '.payment-container',
-          label: 'Pagar',
-        }
-      });
-    });
-  }
-</script>
 </body>
 </html>
